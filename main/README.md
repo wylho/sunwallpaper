@@ -18,7 +18,13 @@ npm install
 npm start
 ```
 
-O wallpaper será exibido em tela cheia. Para fechar, use o Gerenciador de Tarefas (Ctrl+Shift+Esc).
+O wallpaper será exibido em tela cheia. 
+
+### 🎮 Controles
+
+- Mova o mouse para o **canto superior direito** da tela para revelar os controles
+- ⚙️ **Configurações**: Ative/desative a inicialização automática com o Windows
+- ✕ **Fechar**: Encerre o aplicativo
 
 ---
 
@@ -28,6 +34,8 @@ O wallpaper será exibido em tela cheia. Para fechar, use o Gerenciador de Taref
 - ☁️ **Nuvens procedurais**: Efeito de nuvens geradas via shader
 - 🎨 **Visual idêntico ao original**: Mantém o mesmo nível visual e efeitos da referência
 - 💻 **Otimizado para desktop**: Roda como wallpaper em segundo plano
+- ⚙️ **Inicialização automática**: Opção para iniciar com o Windows (configurável)
+- 🎮 **Controles intuitivos**: Interface que aparece apenas quando necessário
 
 ---
 
@@ -49,9 +57,10 @@ O programa usa:
 
 ```
 sun-wallpaper/
-├── main.js          # Processo principal do Electron
-├── index.html       # HTML base
-├── renderer.jsx     # Renderizador React com Three.js
+├── main.js          # Processo principal do Electron com IPC handlers
+├── preload.js       # Ponte segura entre processos (contextBridge)
+├── index.html       # HTML base com UI dos controles e modal de configurações
+├── renderer.jsx     # Renderizador React com Three.js e shaders GLSL
 └── package.json     # Configuração do projeto
 ```
 
@@ -60,8 +69,9 @@ sun-wallpaper/
 ## Notas
 
 - O programa é projetado para rodar em segundo plano como wallpaper
-- Para fechar, use o Gerenciador de Tarefas (Ctrl+Shift+Esc)
+- Para fechar, mova o mouse para o canto superior direito e clique em "Fechar"
 - Consome poucos recursos graças à otimização dos shaders
+- A inicialização automática com o Windows pode ser ativada nas configurações
 
 ## Licença
 

@@ -20,14 +20,320 @@
       width: 100%;
       height: 100%;
     }
+    
+    /* UI Controls - Hidden by default */
+    .ui-controls {
+      position: fixed;
+      top: 0;
+      right: 0;
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    
+    .ui-controls.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .ui-button {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+    
+    .ui-button:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: scale(1.05);
+    }
+    
+    .ui-button.close-btn {
+      background: rgba(220, 38, 38, 0.6);
+    }
+    
+    .ui-button.close-btn:hover {
+      background: rgba(220, 38, 38, 0.9);
+    }
+    
+    /* Settings Modal */
+    .settings-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 30px;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      z-index: 2000;
+      display: none;
+      min-width: 350px;
+    }
+    
+    .settings-modal.visible {
+      display: block;
+      animation: modalFadeIn 0.3s ease;
+    }
+    
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+    
+    .settings-modal h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 15px;
+    }
+    
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .setting-item:last-child {
+      border-bottom: none;
+    }
+    
+    .setting-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: 0.3s;
+      border-radius: 26px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .toggle-slider {
+      background-color: rgba(59, 130, 246, 0.8);
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1500;
+      display: none;
+    }
+    
+    .modal-overlay.visible {
+      display: block;
+    }
+    
+    .status-message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+    }
+    
+    .status-message.success {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      display: block;
+    }
+    
+    .status-message.error {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      display: block;
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
+  
+  <!-- UI Controls -->
+  <div class="ui-controls" id="uiControls">
+    <button class="ui-button" id="settingsBtn" title="Configurações">
+      ⚙️ Configurações
+    </button>
+    <button class="ui-button close-btn" id="closeBtn" title="Fechar">
+      ✕ Fechar
+    </button>
+  </div>
+  
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="settings-modal" id="settingsModal">
+    <h2>⚙️ Configurações</h2>
+    
+    <div class="setting-item">
+      <span class="setting-label">Iniciar automaticamente com o Windows</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="autoStartToggle">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    
+    <div class="status-message" id="statusMessage"></div>
+  </div>
+  
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script src="https://unpkg.com/@react-three/fiber@8.15.14/dist/react-three-fiber.min.js"></script>
   <script type="module" src="./renderer.jsx"></script>
+  
+  <script>
+    // UI Controls Logic
+    const uiControls = document.getElementById('uiControls');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const autoStartToggle = document.getElementById('autoStartToggle');
+    const statusMessage = document.getElementById('statusMessage');
+    
+    let hideTimeout;
+    
+    // Show controls when mouse is in top-right corner
+    document.addEventListener('mousemove', (e) => {
+      const threshold = 150;
+      const isInCorner = e.clientX > window.innerWidth - threshold && 
+                         e.clientY < threshold;
+      
+      if (isInCorner) {
+        clearTimeout(hideTimeout);
+        uiControls.classList.add('visible');
+      } else {
+        hideTimeout = setTimeout(() => {
+          if (!settingsModal.classList.contains('visible')) {
+            uiControls.classList.remove('visible');
+          }
+        }, 300);
+      }
+    });
+    
+    // Close button functionality
+    closeBtn.addEventListener('click', () => {
+      if (window.electronAPI && window.electronAPI.closeApp) {
+        window.electronAPI.closeApp();
+      } else {
+        // Fallback for browser testing
+        window.close();
+      }
+    });
+    
+    // Settings button functionality
+    settingsBtn.addEventListener('click', () => {
+      settingsModal.classList.add('visible');
+      modalOverlay.classList.add('visible');
+      
+      // Load current setting
+      if (window.electronAPI && window.electronAPI.getAutoStart) {
+        window.electronAPI.getAutoStart().then(enabled => {
+          autoStartToggle.checked = enabled;
+        });
+      }
+    });
+    
+    // Close modal when clicking overlay
+    modalOverlay.addEventListener('click', () => {
+      settingsModal.classList.remove('visible');
+      modalOverlay.classList.remove('visible');
+      statusMessage.className = 'status-message';
+    });
+    
+    // Auto-start toggle functionality
+    autoStartToggle.addEventListener('change', async (e) => {
+      const enabled = e.target.checked;
+      
+      if (window.electronAPI && window.electronAPI.setAutoStart) {
+        try {
+          await window.electronAPI.setAutoStart(enabled);
+          showStatus(`Inicialização automática ${enabled ? 'ativada' : 'desativada'}!`, 'success');
+        } catch (error) {
+          showStatus('Erro ao configurar inicialização automática.', 'error');
+          autoStartToggle.checked = !enabled;
+        }
+      } else {
+        // Fallback for browser testing
+        showStatus(`Modo teste: Inicialização automática ${enabled ? 'ativada' : 'desativada'}`, 'success');
+      }
+    });
+    
+    function showStatus(message, type) {
+      statusMessage.textContent = message;
+      statusMessage.className = `status-message ${type}`;
+      
+      setTimeout(() => {
+        statusMessage.className = 'status-message';
+      }, 3000);
+    }
+    
+    // Hide controls when modal is open
+    settingsModal.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimeout);
+    });
+  </script>
 </body>
 </html>

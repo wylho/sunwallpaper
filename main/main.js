@@ -1,7 +1,77 @@
 const { app, BrowserWindow, screen } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 let mainWindow;
+
+// Get the app's executable path
+const getAppPath = () => {
+  if (process.platform === 'win32') {
+    return process.execPath;
+  }
+  return app.getPath('exe');
+};
+
+// Registry path for Windows startup
+const getRegistryPath = () => {
+  const appName = 'Sun Wallpaper';
+  return `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run`;
+};
+
+// Check if auto-start is enabled
+async function getAutoStart() {
+  if (process.platform !== 'win32') {
+    return false;
+  }
+  
+  try {
+    const { execSync } = require('child_process');
+    const appName = 'Sun Wallpaper';
+    const regPath = getRegistryPath();
+    
+    const result = execSync(`reg query "${regPath}" /v "${appName}"`, { 
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'ignore']
+    });
+    
+    return result.includes(appName);
+  } catch (error) {
+    return false;
+  }
+}
+
+// Set auto-start on Windows
+async function setAutoStart(enabled) {
+  if (process.platform !== 'win32') {
+    return Promise.resolve();
+  }
+  
+  const { execSync } = require('child_process');
+  const appName = 'Sun Wallpaper';
+  const appPath = getAppPath();
+  const regPath = getRegistryPath();
+  
+  return new Promise((resolve, reject) => {
+    try {
+      if (enabled) {
+        // Add to registry
+        execSync(`reg add "${regPath}" /v "${appName}" /t REG_SZ /d "${appPath}" /f`, {
+          encoding: 'utf8',
+          stdio: ['pipe', 'pipe', 'ignore']
+        });
+      } else {
+        // Remove from registry
+        execSync(`reg delete "${regPath}" /v "${appName}" /f`, {
+          encoding: 'utf8',
+          stdio: ['pipe', 'pipe', 'ignore']
+        });
+      }
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
 
 function createWindow() {
   const primaryDisplay = screen.getPrimaryDisplay();
@@ -19,12 +89,13 @@ function createWindow() {
     movable: false,
     minimizable: false,
     maximizable: false,
-    closable: false,
+    closable: true,
     hasShadow: false,
     skipTaskbar: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     },
   });
 
@@ -37,6 +108,21 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  // Setup IPC handlers
+  const { ipcMain } = require('electron');
+  
+  ipcMain.handle('get-auto-start', async () => {
+    return await getAutoStart();
+  });
+  
+  ipcMain.handle('set-auto-start', async (event, enabled) => {
+    await setAutoStart(enabled);
+  });
+  
+  ipcMain.on('close-app', () => {
+    app.quit();
+  });
+  
   createWindow();
 
   app.on('activate', () => {
