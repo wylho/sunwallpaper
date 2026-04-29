@@ -1,6 +1,5 @@
-const { app, BrowserWindow, screen } = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const fs = require('fs');
 
 let mainWindow;
 
@@ -15,7 +14,7 @@ const getAppPath = () => {
 // Registry path for Windows startup
 const getRegistryPath = () => {
   const appName = 'Sun Wallpaper';
-  return `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run`;
+  return `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run`;
 };
 
 // Check if auto-start is enabled
@@ -23,17 +22,17 @@ async function getAutoStart() {
   if (process.platform !== 'win32') {
     return false;
   }
-  
+
   try {
     const { execSync } = require('child_process');
     const appName = 'Sun Wallpaper';
     const regPath = getRegistryPath();
-    
-    const result = execSync(`reg query "${regPath}" /v "${appName}"`, { 
+
+    const result = execSync(`reg query "${regPath}" /v "${appName}"`, {
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'ignore']
     });
-    
+
     return result.includes(appName);
   } catch (error) {
     return false;
@@ -45,12 +44,12 @@ async function setAutoStart(enabled) {
   if (process.platform !== 'win32') {
     return Promise.resolve();
   }
-  
+
   const { execSync } = require('child_process');
   const appName = 'Sun Wallpaper';
   const appPath = getAppPath();
   const regPath = getRegistryPath();
-  
+
   return new Promise((resolve, reject) => {
     try {
       if (enabled) {
@@ -74,6 +73,9 @@ async function setAutoStart(enabled) {
 }
 
 function createWindow() {
+  // Import screen module ONLY inside this function (after app.ready)
+  const { screen } = require('electron');
+  
   const primaryDisplay = screen.getPrimaryDisplay();
   const { width, height } = primaryDisplay.workAreaSize;
 
@@ -110,19 +112,19 @@ function createWindow() {
 app.whenReady().then(() => {
   // Setup IPC handlers
   const { ipcMain } = require('electron');
-  
+
   ipcMain.handle('get-auto-start', async () => {
     return await getAutoStart();
   });
-  
+
   ipcMain.handle('set-auto-start', async (event, enabled) => {
     await setAutoStart(enabled);
   });
-  
+
   ipcMain.on('close-app', () => {
     app.quit();
   });
-  
+
   createWindow();
 
   app.on('activate', () => {
@@ -139,10 +141,13 @@ app.on('window-all-closed', () => {
 });
 
 // Handle display changes
-screen.on('display-metrics-changed', () => {
-  if (mainWindow) {
-    const primaryDisplay = screen.getPrimaryDisplay();
-    const { width, height } = primaryDisplay.workAreaSize;
-    mainWindow.setBounds({ x: 0, y: 0, width, height });
-  }
+app.whenReady().then(() => {
+  const { screen } = require('electron');
+  screen.on('display-metrics-changed', () => {
+    if (mainWindow) {
+      const primaryDisplay = screen.getPrimaryDisplay();
+      const { width, height } = primaryDisplay.workAreaSize;
+      mainWindow.setBounds({ x: 0, y: 0, width, height });
+    }
+  });
 });
