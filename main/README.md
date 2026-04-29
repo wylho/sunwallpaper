@@ -1,6 +1,26 @@
-# Atmospheric Wallpaper
+# Sun Wallpaper
 
 Live wallpaper para Windows com efeito de atmospheric scattering que muda automaticamente baseado na hora do dia.
+
+## 🚀 Instalação
+
+Para usar este live wallpaper, você precisa ter o **Node.js** instalado no seu computador:
+
+1. Baixe e instale o Node.js em: https://nodejs.org/
+2. Clone ou baixe este repositório
+3. Abra o terminal na pasta do projeto
+4. Instale as dependências:
+```bash
+npm install
+```
+5. Execute o wallpaper:
+```bash
+npm start
+```
+
+O wallpaper será exibido em tela cheia. Para fechar, use o Gerenciador de Tarefas (Ctrl+Shift+Esc).
+
+---
 
 ## Características
 
@@ -9,47 +29,7 @@ Live wallpaper para Windows com efeito de atmospheric scattering que muda automa
 - 🎨 **Visual idêntico ao original**: Mantém o mesmo nível visual e efeitos da referência
 - 💻 **Otimizado para desktop**: Roda como wallpaper em segundo plano
 
-## Instalação
-
-### Opção 1: Baixar Instalador Pronto (Recomendado)
-
-A maneira mais fácil de instalar é baixar o instalador pronto diretamente da página de **Releases** deste repositório no GitHub:
-
-1. Vá até a aba **[Releases](../../releases)** no topo desta página
-2. Baixe o arquivo `Atmospheric.Wallpaper.Setup.X.X.X.exe` mais recente
-3. Execute o instalador e siga as instruções
-4. Pronto! O wallpaper começará a rodar automaticamente
-
-**Não é necessário instalar Node.js, npm ou usar terminal!**
-
-### Opção 2: Compilar do Código Fonte
-
-Se você deseja compilar o projeto a partir do código fonte:
-
-#### Pré-requisitos
-
-- Node.js (versão 16 ou superior)
-- Windows 10/11
-
-#### Passos
-
-1. Clone este repositório ou baixe o código fonte
-2. Instale as dependências:
-```bash
-npm install
-```
-
-3. Execute o programa para testar:
-```bash
-npm start
-```
-
-4. Para criar um executável Windows com instalador:
-```bash
-npm run dist
-```
-
-O instalador será gerado na pasta `dist`.
+---
 
 ## Como Funciona
 
@@ -68,12 +48,14 @@ O programa usa:
 ## Estrutura do Projeto
 
 ```
-atmospheric-wallpaper/
+sun-wallpaper/
 ├── main.js          # Processo principal do Electron
 ├── index.html       # HTML base
 ├── renderer.jsx     # Renderizador React com Three.js
 └── package.json     # Configuração do projeto
 ```
+
+---
 
 ## Notas
 
