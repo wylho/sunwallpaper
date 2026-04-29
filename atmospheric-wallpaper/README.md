@@ -2,16 +2,9 @@
 
 Live wallpaper para Windows com efeito de atmospheric scattering que muda automaticamente baseado na hora do dia.
 
-## Características
+## 📥 Instalação Rápida (Sem Terminal!)
 
-- 🌅 **Iluminação dinâmica**: A cor do céu e intensidade do sol mudam automaticamente conforme a hora do dia
-- ☁️ **Nuvens procedurais**: Efeito de nuvens geradas via shader
-- 🎨 **Visual idêntico ao original**: Mantém o mesmo nível visual e efeitos da referência
-- 💻 **Otimizado para desktop**: Roda como wallpaper em segundo plano
-
-## Instalação
-
-### Opção 1: Baixar Instalador Pronto (Recomendado)
+### Opção 1: Baixar Instalador Pronto (**Recomendado**)
 
 A maneira mais fácil de instalar é baixar o instalador pronto diretamente da página de **Releases** deste repositório no GitHub:
 
@@ -22,7 +15,18 @@ A maneira mais fácil de instalar é baixar o instalador pronto diretamente da p
 
 **Não é necessário instalar Node.js, npm ou usar terminal!**
 
-### Opção 2: Compilar do Código Fonte
+---
+
+## Características
+
+- 🌅 **Iluminação dinâmica**: A cor do céu e intensidade do sol mudam automaticamente conforme a hora do dia
+- ☁️ **Nuvens procedurais**: Efeito de nuvens geradas via shader
+- 🎨 **Visual idêntico ao original**: Mantém o mesmo nível visual e efeitos da referência
+- 💻 **Otimizado para desktop**: Roda como wallpaper em segundo plano
+
+---
+
+## 🔧 Instalação Avançada (Para Desenvolvedores)
 
 Se você deseja compilar o projeto a partir do código fonte:
 
@@ -51,6 +55,8 @@ npm run dist
 
 O instalador será gerado na pasta `dist`.
 
+---
+
 ## Como Funciona
 
 O programa usa:
@@ -74,6 +80,21 @@ atmospheric-wallpaper/
 ├── renderer.jsx     # Renderizador React com Three.js
 └── package.json     # Configuração do projeto
 ```
+
+## 📦 Publicando Instaladores no GitHub
+
+Para que os usuários possam baixar o instalador pronto sem precisar de terminal:
+
+1. **Faça push do código** para o GitHub
+2. **Crie uma tag de versão**: `git tag v1.0.0 && git push origin v1.0.0`
+3. **Aguarde o build automático** (5-10 minutos)
+4. **O instalador aparecerá** na aba [Releases](../../releases)
+
+O workflow do GitHub Actions compila automaticamente o `.exe` em servidores Windows da Microsoft e publica no Releases.
+
+📖 Veja o guia completo em [GITHUB_RELEASES.md](GITHUB_RELEASES.md)
+
+---
 
 ## Notas
 

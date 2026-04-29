@@ -1,21 +1,23 @@
-```
-# Dependencies
-node_modules/
+# Examples and releases documentation
+GITHUB_RELEASES.md
 
-# Environment
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment variables
 .env
 .env.local
 .env.*
 
-# Logs
-*.log
+# Dependencies
+node_modules/
 
-# Coverage
-coverage/
-htmlcov/
-.coverage
+# Editors
+.vscode/
+.idea/
 
-# Build outputs
+# Build artifacts
 dist/
 build/
 target/
@@ -31,31 +33,9 @@ venv/
 .venv/
 .venv.bak/
 pip-log.txt
-pip-selfcheck.json
-.pytest_cache/
-.mypy_cache/
+pip-delete-this-directory.txt
 
-# Node.js
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Temporary
-*.tmp
-*.temp
-*.bak
-
-# Compressed
+# Compressed files
 *.zip
 *.gz
 *.tar
@@ -78,4 +58,624 @@ Thumbs.db
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-```
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Testing
+.mypy_cache/
+.pytest_cache/
+.tox/
+.nox/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Binary files
+*.exe
+*.dll
+*.so
+*.a
+*.obj
+*.out
+*.class
+*.jar
+*.war
+*.ear
+*.o
+*.pyc
+*.pyo
+*.pyd
+
+# IDE specific
+.gradle/
+.settings/
+.project
+.classpath
+.target
+
+# Documentation builds
+_site/
+_sass-cache/
+.jekyll-metadata
+
+# Distribution / packaging
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# IDE
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/recommendations.json
+
+# GitHub
+.github/
+
+# Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Bower
+bower_components/
+
+# Grunt
+Gruntfile.js
+
+# Gulp
+gulpfile.js
+
+# Composer/Packagist
+vendor/
+
+# Code coverage
+coverage.lcov
+
+# Vue
+dist/
+node_modules/
+*.log
+
+# React
+build/
+node_modules/
+*.log
+
+# Angular
+dist/
+node_modules/
+*.log
+
+# Webpack
+webpack.config.js
+
+# TypeScript
+tsconfig.json
+package-lock.json
+
+# Go
+*.out
+bin/
+pkg/
+
+# Rust
+target/
+Cargo.lock
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+.recommenders
+
+# C#
+*.sln
+*.csproj
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esult*/
+*.Cache
+ClientBin/
+[Ll]og[s]/
+[Ll]ogs/
+$tf/
+*.VC.db
+*.VC.VC.opendb
+
+# Ruby
+*.gem
+*.rbc
+.rbx
+vendor/bundle/
+lib/bundler/man/
+*.lock
+
+# PHP
+*.phar
+.php_cs.cache
+.phpunit.result.cache
+
+# Perl
+*.plc
+blib/
+pm_to_blib/
+*.perl
+Perlobjects/
+perl.com/
+*.log
+.pl.tdy
+
+# Scala
+*.class
+*.log
+.libs
+.lift
+target/
+project/target/
+project/project/target/
+lib_managed/
+src_managed/
+**/*.sc
+**/*.scala.patch
+
+# Haskell
+dist-newstyle/
+cabal.project.local
+cabal.project.local~
+dist/
+setup-config
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal-dev/
+*.prof
+*.aux
+*.hp
+*.eventlog
+.stack-work/
+cabal.config
+cabal.project.freeze
+*.dump
+*.ttf
+*.pfb
+*.afm
+*.pfm
+*.dfont
+*.woff
+*.woff2
+*.eot
+*.svg
+*.otf
+
+# Erlang
+.eunit
+erl_crash.dump
+.nif.so
+*.beam
+*.plt
+*.seed
+*.beam.smp
+*.old
+*.new
+
+# Elixir
+*.beam
+*.ez
+.beam
+.MD5
+.elixir_history
+erl_crash.dump
+mix.lock
+*.par
+ebin/
+doc/
+_underscore/
+cover/
+include/
+priv/
+.deps/
+.concrete_env/
+_saved_test_results/
+
+# OCaml
+*.run
+*.run.other
+*.cmx
+*.cmxa
+*.cmi
+*.cmo
+*.cma
+*.cmxs
+*.annot
+*.spot
+*.spit
+*.cmt
+*.cmti
+*.merlin
+*.omc
+*~
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.lst
+*.lst
+*.o
+*.a
+*.so
+*.so.*
+*.dylib*
+*.dll
+*.exe
+*.opt
+*.objdump
+*.bin
+*.hex
+*.elf
+*.axf
+*.uf2
+*.lst
+*.map
+*.sym
+*.lss
+*.mii
+*.srec
+*.elf
+*.hex
+*.bin
+*.out
+*.lst
+*.map
+*.sym
+*.lss
+*.mii
+*.srec
+*.d
+*.di
+*.o
+*.a
+*.so
+*.so.*
+*.dylib*
+*.dll
+*.exe
+*.opt
+*.objdump
+*.bin
+*.hex
+*.elf
+*.axf
+*.uf2
+*.lst
+*.map
+*.sym
+*.lss
+*.mii
+*.srec
+*.d
+*.di
+
+# Julia
+*.ji
+*.jl.cov
+*.jl.log
+.julia
+
+# Dart
+*.dart.js
+*.dart.js.info.json
+*.symbols
+*.so
+*.dylib
+*.dll
+*.class
+*.jar
+*.war
+*.ear
+*.tar.gz
+*.orig.tar.gz
+*.orig
+*.rej
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.coverage
+coverage.xml
+*.gcda
+*.gcno
+*.gcov
+*.lcov
+*.info
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tgz
+*.tar
+*.gz
+*.zip
+*.rar
+*.7z
+*.bz2
+*.xz
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.webm
+*.svg
+*.ico
+*.tiff
+*.tif
+*.raw
+*.psd
+*.ai
+*.eps
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.odt
+*.ods
+*.odp
+*.rtf
+*.txt
+*.csv
+*.json
+*.xml
+*.yaml
+*.yml
+*.toml
+*.ini
+*.cfg
+*.conf
+*.properties
+*.env
+*.env.local
+*.env.*
+*.git
+*.gitignore
+*.gitattributes
+*.gitmodules
+*.gitkeep
+*.editorconfig
+*.prettierrc
+*.eslintrc
+*.babelrc
+*.jestrc
+*.nodemonrc
+*.nyc_output
+*.nycrc
+*.istanbul.yml
+*.istanbul.yml.bak
+*.istanbul.yml.swp
+*.istanbul.yml.swx
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~$
+*.istanbul.yml~......
